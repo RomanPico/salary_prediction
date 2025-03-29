@@ -1,0 +1,9 @@
+# Python virtual env
+venv/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Python compiled files
+__pycache__/
+*.pyc
