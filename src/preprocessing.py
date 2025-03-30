@@ -3,16 +3,20 @@ import numpy as np
 
 def prepare_data(people_path, salary_path):
     """
-    Load and clean the data
-    
-    - reads the CSV files for people and salary.
-    - merges them based on ID.
-    - drops rows with null values.
-    - adds a new column: log(Salary)
-    
+    Loads and cleans the dataset.
+
+    This function merges the people and salary datasets using their 'id',
+    removes any rows with missing values, and adds a new column with the
+    logarithm of the salary.
+
+    Args:
+        people_path (str): Path to the people CSV file.
+        salary_path (str): Path to the salary CSV file.
+
     Returns:
-    - df_clean: DataFrame with the cleaned data and log(Salary) column.
+        pd.DataFrame: Cleaned dataset with an additional 'Salary_log' column.
     """
+
     
     # Cargar datasets
     df_people = pd.read_csv(people_path)

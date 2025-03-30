@@ -2,13 +2,22 @@ import pandas as pd
 
 def transform_features(df, job_threshold=3):
     """
-    V0.1: 
-    Transform the "clean dataset" into a dataset ready for the model.
-    Until now, the features we included are:
-    -One hot encoding for categorical variable "Education Level".
-    -Group Job titles with few appearances as "Other" following what we learned in EDA
-    -One hot encoding for Job Title.
+    Transforms the cleaned dataset into features and target for modeling.
+
+    This function performs feature engineering steps such as:
+    - Groups job titles with fewer than `job_threshold` occurrences into "Other".
+    - Applies one-hot encoding to 'Education Level' and 'Job Title'.
+    - Drops irrelevant columns like 'id', 'Gender', 'description', and original salary columns.
+
+    Args:
+        df (pd.DataFrame): Cleaned input DataFrame with required columns.
+        job_threshold (int): Minimum number of occurrences to keep a job title separate.
+
+    Returns:
+        X (pd.DataFrame): Feature matrix ready for training.
+        y (pd.Series): Target variable (log of salary).
     """
+
     df_feat = df.copy()
 
     # group job titles with appareances lower than threshold in other.

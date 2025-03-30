@@ -19,8 +19,13 @@ The second group of functions will help us to understand the data and how its di
 '''
 def check_id_consistency(df_people, df_salary):
     """
-    Here we just check that both datafiles have the same id.
+    Checks for mismatched IDs between people and salary datasets.
+
+    Args:
+        df_people (pd.DataFrame): DataFrame containing people data.
+        df_salary (pd.DataFrame): DataFrame containing salary data.
     """
+
     ids_people = set(df_people["id"])
     ids_salary = set(df_salary["id"])
 
@@ -32,23 +37,37 @@ def check_id_consistency(df_people, df_salary):
 
 def check_nulls(df, name="DataFrame"):
     """
-    Here we sum all the null values for every column to understand how incomplete is the data .
+    Prints the number of null values per column in a DataFrame.
+
+    Args:
+        df (pd.DataFrame): Input DataFrame.
+        name (str): Label to identify the DataFrame in output.
     """
+
+
     print(f"\n📋 amount of nulls per column {name}:")
     print(df.isnull().sum())
 
 def count_salary_nulls(df):
     """
-    Salary is the target variable, so it's really important. If a row has not a salary, we can't use it for training.
+    Counts and prints how many rows have null values in the Salary column.
+
+    Args:
+        df (pd.DataFrame): DataFrame with a Salary column.
     """
+
     null_salary = df["Salary"].isnull().sum()
     print(f"\n rows in salary that are null: {null_salary}")
 
 def count_rows_with_any_null(df, name="DataFrame"):
     """
-    Since the dataset is "small", we can see directly which cells are NaN. This help us decide
-    how to handle them better. If the dataset was bigger, this function maybe it's not so useful.
+    Prints how many rows have at least one null value and shows them.
+
+    Args:
+        df (pd.DataFrame): Input DataFrame.
+        name (str): Label to identify the DataFrame in output.
     """
+
     null_rows = df[df.isnull().any(axis=1)]
     print(f"\n amount of rows that have at least a NaN value: {len(null_rows)}")
     print(null_rows)
@@ -56,16 +75,24 @@ def count_rows_with_any_null(df, name="DataFrame"):
 
 def print_df_overview(df, name="DataFrame"):
     """
-    Print the dtype of the different columns. We can check if a "numerical variable" is not float type. 
+    Prints basic information about a DataFrame: number of rows/columns and data types.
+
+    Args:
+        df (pd.DataFrame): Input DataFrame.
+        name (str): Label to identify the DataFrame in output.
     """
+
     print("\n dtype:")
     print(df.dtypes)
 
 def plot_distributions(df):
-    """ 
-    As data is better understood with graphs, we plot the distributions of some variables.
-    Also, as the Salary column is not normally distributed, we try the natural logarithm.
     """
+    Plots histograms for Salary, Age, Years of Experience, and log(Salary).
+
+    Args:
+        df (pd.DataFrame): DataFrame that includes those columns.
+    """
+
     fig, axes = plt.subplots(1, 4, figsize=(18, 5))
 
     sns.histplot(df["Salary"], bins=30, kde=True, ax=axes[0])
@@ -85,9 +112,13 @@ def plot_distributions(df):
 
 def count_job_titles(df, threshold):
     """
-    The categorical variable job title has a lot of different values. We need to understand how this values
-    are distributed. We use threshold so we can "change" how we group them.
+    Displays the count of job titles that appear more than a given threshold.
+
+    Args:
+        df (pd.DataFrame): DataFrame with a 'Job Title' column.
+        threshold (int): Minimum number of appearances to be considered.
     """
+
     job_counts = df["Job Title"].value_counts()
     titles_above_N = job_counts[job_counts > threshold]
     total_rows_above_N = titles_above_N.sum()

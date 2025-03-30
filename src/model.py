@@ -6,14 +6,33 @@ import numpy as np
 
 def split_data(X, y, test_size=0.2, random_state=42):
     """
-    Standard separation of the data in training and testing .
+    Splits the dataset into training and testing sets.
+
+    Args:
+        X (pd.DataFrame): Feature matrix.
+        y (pd.Series): Target variable.
+        test_size (float): Fraction of data to use as test set.
+        random_state (int): Random seed for reproducibility.
+
+    Returns:
+        tuple: X_train, X_test, y_train, y_test
     """
+
     return train_test_split(X, y, test_size=test_size, random_state=random_state)
 
 def train_model(X_train, y_train, model=None):
     """
-    Training the model. In future versions we look forward to use other models.
+    Trains a regression model on the training data.
+
+    Args:
+        X_train (pd.DataFrame): Features for training.
+        y_train (pd.Series): Target values for training.
+        model (object, optional): Scikit-learn compatible model. Defaults to LinearRegression.
+
+    Returns:
+        object: Trained model.
     """
+
     if model is None:
         model = LinearRegression()
     model.fit(X_train, y_train)
@@ -21,10 +40,20 @@ def train_model(X_train, y_train, model=None):
 
 def evaluate_model(model, X_test, y_test, show_examples=True, baseline=True):
     """
-    This function evaluates the model using the test set and calculates different metrcics. 
-    We also compare with dummyregresor (using the mean) to see if our model is better
-    than using the average.
+    Evaluates a trained model using MAE and RMSE (with confidence intervals).
+    Also compares it against a DummyRegressor baseline.
+
+    Args:
+        model (object): Trained regression model.
+        X_test (pd.DataFrame): Test features.
+        y_test (pd.Series): True target values (log-salaries).
+        show_examples (bool): Whether to print sample predictions (currently disabled).
+        baseline (bool): Whether to compare against a DummyRegressor.
+
+    Returns:
+        None
     """
+
     y_pred_log = model.predict(X_test)
     y_pred_real = np.exp(y_pred_log)
     y_test_real = np.exp(y_test)
@@ -70,17 +99,19 @@ def evaluate_model(model, X_test, y_test, show_examples=True, baseline=True):
         
 def bootstrap(y_true, y_pred, metric_fn, n_bootstrap=1000, ci=95):
     """
-    This function calculates the trust interval for a given metric using bootstrap method
-    
-    Parameters:
-    -- y_true: real salaries values
-    -- y_pred: predicted salaries values
-    -- metric_fn: function that calculates the metric (eg: mean_absolute_error)
-    -- n_bootstrap: number of random samples
-    -- ci: confidence level (eg: 95)
-    It returns the lower and upper limit of the confidence interval.
- 
+    Computes a confidence interval for a metric using bootstrap resampling.
+
+    Args:
+        y_true (np.array): True target values.
+        y_pred (np.array): Predicted values.
+        metric_fn (function): Metric function to apply (e.g., mean_absolute_error).
+        n_bootstrap (int): Number of bootstrap samples.
+        ci (int): Confidence interval percentage (e.g., 95).
+
+    Returns:
+        tuple: Lower and upper bounds of the confidence interval.
     """
+
     n = len(y_true)
     scores = []
 
