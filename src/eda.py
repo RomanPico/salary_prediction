@@ -125,3 +125,44 @@ def count_job_titles(df, threshold):
 
     print(f"\n Amount of rows with job titles that appear more than {threshold} times: {total_rows_above_N}")
     print(f" Job Titles with more than {threshold} repetitions:\n{titles_above_N}")
+    
+    
+
+def plot_salary_by_gender(df):
+    """
+    Plots a boxplot to visualize salary distribution across genders.
+    
+    Args:
+        df (pd.DataFrame): Cleaned DataFrame with 'Gender' and 'Salary'.
+    """
+    plt.figure(figsize=(8, 5))
+    sns.boxplot(x="Gender", y="Salary", data=df)
+    plt.title("Salary Distribution by Gender")
+    plt.ylabel("Salary")
+    plt.xlabel("Gender")
+    plt.show()
+
+def gender_salary_stats(df):
+    """
+    Prints mean salary and count per gender.
+    
+    Args:
+        df (pd.DataFrame): Cleaned DataFrame with 'Gender' and 'Salary'.
+    """
+    grouped = df.groupby("Gender")["Salary"].agg(["count", "mean", "median"])
+    print("📊 Salary stats by gender:")
+    print(grouped)
+    
+
+def plot_kde_salary_by_gender(df):
+    """
+    Plots KDE curves to compare salary distributions between genders.
+    """
+    plt.figure(figsize=(8, 5))
+    sns.kdeplot(data=df, x="Salary", hue="Gender", fill=True)
+    plt.title("Salary distribution by Gender")
+    plt.xlabel("Salary")
+    plt.ylabel("Count")
+    plt.show()
+
+
