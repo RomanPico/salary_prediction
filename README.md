@@ -1,4 +1,4 @@
-# Salary Forecast V0.1
+# Salary Forecast V1.1
 
 This proyect consist in a machine learning model for predicting the salary of a person. This is done using different variables like Age, education, job position and years of experience.
 
@@ -63,9 +63,12 @@ The file must include **only the following columns**, with **exact same column n
 
 Example:
 
-Age,Education Level,Job Title,Years of Experience
+Age Education Level Job Title Years of Experience
+
 35,Bachelor's,Data Scientist,5
+
 40,Master's,Senior Data Analyst,10
+
 28,PhD,Research Scientist,3
 
 
