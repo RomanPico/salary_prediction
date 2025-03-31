@@ -13,8 +13,9 @@ The project is structure in the following way:
   - `preprocessing.py`: Data loading and cleaning
   - `features.py`: Transformation of categorical variables
   - `model.py`: Model training, evaluation, and performance metrics
+  - `predict.py`: Allows user to calculate salary using the trained model
 
-- `data/`: Contains the original CSVs and an example file for batch predictions
+- `data/`: Contains the original CSVs and an file for salary predictions
 
 - `README.md`: This file
 - `requirements.txt`: Libraries needed to run this code.
@@ -32,18 +33,37 @@ The project is structure in the following way:
 
  _Future Improvements_
 
-- Add support for more sophisticated models (e.g., Random Forest, XGBoost)
+- Add support for more sophisticated models (e.g., Random Forest)
 - Improve missing data handling instead of dropping rows (e.g., imputation based on correlated variables)
 
 
 ##  How to run the project
 
-1. Clone this repository:
+Clone this repository:
 
-```bash
+
 git clone https://github.com/yourusername/salary-forecast.git
 cd salary-forecast
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 jupyter notebook main.ipynb
+
+
+## CSV Format for Predictions
+
+To generate predictions on new data, you must provide a CSV file (e.g., `predict_sample.csv`) located in the `data/` folder.
+
+The file must include **only the following columns**, with **exact same column names** as during training:
+
+- `Age` (numeric)
+- `Education Level` (one of: `"Bachelor's"`, `"Master's"`, `"PhD"`, etc.)
+- `Job Title` (string)
+- `Years of Experience` (numeric)
+
+Example:
+
+Age,Education Level,Job Title,Years of Experience
+35,Bachelor's,Data Scientist,5
+40,Master's,Senior Data Analyst,10
+28,PhD,Research Scientist,3
