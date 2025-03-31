@@ -64,16 +64,16 @@ def evaluate_model(model, X_test, y_test, show_examples=True, baseline=True):
     mae_ci = bootstrap(y_test_real.values, y_pred_real, mean_absolute_error)
     rmse_ci = bootstrap(y_test_real.values, y_pred_real, lambda y1, y2: np.sqrt(mean_squared_error(y1, y2)))
    
-    #print(f" MAE : {mae:,.2f} $ |  95% CI: {mae_ci[0]:,.2f} – {mae_ci[1]:,.2f}")
-    #print(f" RMSE: {rmse:,.2f} $ |  95% CI: {rmse_ci[0]:,.2f} – {rmse_ci[1]:,.2f}")
     print("\n performance on test:")
     print("----------------------------------")
-    print(f" MAE: ${mae:,.2f}")
-    print(f"Average prediction ${mae:,.0f}")
-    print(f"95% confidence interval: ${mae_ci[0]:,.2f} – ${mae_ci[1]:,.2f}\n")
+    print(" Model Evaluation Summary:")
+    print("----------------------------------")
+    print(f" MAE: ${mae:,.2f} (on average, predictions deviate this much from actual salaries)")
+    print(f"95% Confidence Interval for MAE: ${mae_ci[0]:,.2f} – ${mae_ci[1]:,.2f}\n")
 
-    print(f" RMSE : ${rmse:,.2f}")
-    print(f"95% confidence interval: ${rmse_ci[0]:,.2f} – ${rmse_ci[1]:,.2f}\n")
+    print(f"RMSE: ${rmse:,.2f} ")
+    print(f"95% Confidence Interval for RMSE: ${rmse_ci[0]:,.2f} – ${rmse_ci[1]:,.2f}\n")
+
 
 
     '''
@@ -91,10 +91,13 @@ def evaluate_model(model, X_test, y_test, show_examples=True, baseline=True):
         dummy_mae = mean_absolute_error(y_test_real, dummy_preds)
         dummy_rmse = np.sqrt(mean_squared_error(y_test_real, dummy_preds))
 
-        print(" baseline model (DummyRegressor – mean prediction):")
-        print("-----------------------------------------------------")
-        print(f" MAE (dummy): ${dummy_mae:,.2f}")
-        print(f" RMSE (dummy): ${dummy_rmse:,.2f}")
+    improvement_mae = dummy_mae - mae
+    improvement_rmse = dummy_rmse - rmse
+    print("Comparison vs baseline (dum. regressor using mean):")
+    print("--------------------------------------------------------")
+    print(f" MAE (Dummy): ${dummy_mae:,.2f} -  improvement: ${improvement_mae:,.2f}")
+    print(f" RMSE (Dummy): ${dummy_rmse:,.2f}  -  improvement: ${improvement_rmse:,.2f}")
+
 
         
 def bootstrap(y_true, y_pred, metric_fn, n_bootstrap=1000, ci=95):
