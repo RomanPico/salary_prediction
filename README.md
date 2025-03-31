@@ -42,7 +42,7 @@ The project is structure in the following way:
 Clone this repository:
 
 
-git clone https://github.com/yourusername/salary-forecast.git
+git clone https://github.com/RomanPico/salary_prediction/.git
 cd salary-forecast
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
