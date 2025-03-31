@@ -42,7 +42,7 @@ The project is structure in the following way:
 Clone this repository:
 
 
-git clone https://github.com/yourusername/salary-forecast.git
+git clone https://github.com/RomanPico/salary_prediction/.git
 cd salary-forecast
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -71,7 +71,6 @@ Age Education Level Job Title Years of Experience
 
 28,PhD,Research Scientist,3
 
-
 ##  Ethical Considerations
 
 During feature selection, we explored whether including `Gender` could improve model accuracy. While using gender as a feature led to a small improvement (~1.5% reduction in MAE), we ultimately decided to exclude it from the model due to ethical concerns.
@@ -79,3 +78,4 @@ During feature selection, we explored whether including `Gender` could improve m
 An exploratory analysis showed a noticeable difference in salary distributions between genders. However, we did not find strong evidence that the salary for a given role varies significantly by gender. A possible explanation is that men and women in the dataset are not evenly distributed across job positions, which may partially account for the observed difference.
 
 Given the risk of reinforcing bias — especially if gender is correlated with access to higher-paying roles — we opted to keep the model gender-neutral. The analysis and plots are left commented in the notebook for transparency and reproducibility.
+
