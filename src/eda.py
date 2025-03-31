@@ -32,8 +32,8 @@ def check_id_consistency(df_people, df_salary):
     only_in_people = ids_people - ids_salary
     only_in_salary = ids_salary - ids_people
 
-    print(f"🔎 IDs in people.csv which are not in salary.csv: {len(only_in_people)}")
-    print(f"🔎 IDs in salary.csv which are not in people.csv: {len(only_in_salary)}")
+    print(f"IDs in people.csv which are not in salary.csv: {len(only_in_people)}")
+    print(f"IDs in salary.csv which are not in people.csv: {len(only_in_salary)}")
 
 def check_nulls(df, name="DataFrame"):
     """
@@ -45,7 +45,7 @@ def check_nulls(df, name="DataFrame"):
     """
 
 
-    print(f"\n📋 amount of nulls per column {name}:")
+    print(f"\n amount of nulls per column {name}:")
     print(df.isnull().sum())
 
 def count_salary_nulls(df):
@@ -150,7 +150,7 @@ def gender_salary_stats(df):
         df (pd.DataFrame): Cleaned DataFrame with 'Gender' and 'Salary'.
     """
     grouped = df.groupby("Gender")["Salary"].agg(["count", "mean", "median"])
-    print("📊 Salary stats by gender:")
+    print("Salary stats by gender:")
     print(grouped)
     
 
