@@ -1,4 +1,4 @@
-# Salary Forecast V0.1
+# Salary Forecast V1.0
 
 This proyect consist in a machine learning model for predicting the salary of a person. This is done using different variables like Age, education, job position and years of experience.
 
