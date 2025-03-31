@@ -135,7 +135,7 @@ def plot_salary_by_gender(df):
     Args:
         df (pd.DataFrame): Cleaned DataFrame with 'Gender' and 'Salary'.
     """
-    plt.figure(figsize=(8, 5))
+    plt.figure(figsize=(8,5))
     sns.boxplot(x="Gender", y="Salary", data=df)
     plt.title("Salary Distribution by Gender")
     plt.ylabel("Salary")
@@ -158,11 +158,12 @@ def plot_kde_salary_by_gender(df):
     """
     Plots KDE curves to compare salary distributions between genders.
     """
-    plt.figure(figsize=(8, 5))
+    plt.figure(figsize=(8,5))
     sns.kdeplot(data=df, x="Salary", hue="Gender", fill=True)
     plt.title("Salary distribution by Gender")
     plt.xlabel("Salary")
     plt.ylabel("Count")
     plt.show()
+    print("Note: If the KDE appears to go below zero, it is a plotting artifact. Actual density values are not negative.")
 
 

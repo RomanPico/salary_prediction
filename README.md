@@ -1,4 +1,4 @@
-# Salary Forecast V1.1
+# Salary Forecast V1.2
 
 This proyect consist in a machine learning model for predicting the salary of a person. This is done using different variables like Age, education, job position and years of experience.
 
@@ -14,6 +14,7 @@ The project is structure in the following way:
   - `features.py`: Transformation of categorical variables
   - `model.py`: Model training, evaluation, and performance metrics
   - `predict.py`: Allows user to calculate salary using the trained model
+  - `optional_feats.py`: Includes saving model predictions in a SQL database.
 
 - `data/`: Contains the original CSVs and an file for salary predictions
 
@@ -30,6 +31,12 @@ The project is structure in the following way:
 - Evaluate the model using MAE and RMSE
 - Report 95% confidence intervals for the metrics using bootstrap resampling
 - Compare model performance against a DummyRegressor (mean prediction)
+
+_Aditional Features included post V1.0_
+
+- Save the model predictions in a SQL database.
+- Aditional graphs to visualize the relationship between used features and target variables.
+
 
  _Future Improvements_
 

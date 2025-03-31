@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from src.features import transform_features
+from src.optional_feats import save_predictions_to_database
 
 def predict_from_csv(filepath, model, job_threshold=3):
     """
@@ -22,7 +23,8 @@ def predict_from_csv(filepath, model, job_threshold=3):
     
     ##Check for unseen education levels
     training_levels = {"Bachelor's", "Master's", "PhD"}  # hardcoded from the training data
-    input_levels = set(df_new["Education Level"].dropna().unique())
+    input_levels = set(df_new["Education Level"].dropna().str.lower().unique())
+
 
     unexpected_levels = input_levels - training_levels
     if unexpected_levels:
@@ -48,6 +50,7 @@ def predict_from_csv(filepath, model, job_threshold=3):
     # Add predictions to the original DataFrame
     df_new = df_new.copy()
     df_new["Predicted Salary"] = y_pred_real
+    save_predictions_to_database(df_new[["Age", "Education Level", "Job Title", "Years of Experience", "Predicted Salary"]])
 
     return df_new
 
