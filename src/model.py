@@ -20,23 +20,23 @@ def split_data(X, y, test_size=0.2, random_state=42):
 
     return train_test_split(X, y, test_size=test_size, random_state=random_state)
 
-def train_model(X_train, y_train, model=None):
+def train_model(X_train, y_train, model):
     """
-    Trains a regression model on the training data.
+    Trains a regression model  or a random forest on the training data.
 
     Args:
         X_train (pd.DataFrame): Features for training.
         y_train (pd.Series): Target values for training.
-        model (object, optional): Scikit-learn compatible model. Defaults to LinearRegression.
+        model (object): Instantiated Scikit-learn compatible model.
 
     Returns:
         object: Trained model.
     """
-
-    if model is None:
-        model = LinearRegression()
+    print(f" Model used: {model.__class__.__name__}")
     model.fit(X_train, y_train)
     return model
+
+
 
 def evaluate_model(model, X_test, y_test, show_examples=True, baseline=True):
     """
