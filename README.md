@@ -1,4 +1,4 @@
-# Salary Forecast V1.2
+# Salary Forecast V1.3
 
 This proyect consist in a machine learning model for predicting the salary of a person. This is done using different variables like Age, education, job position and years of experience.
 
@@ -32,15 +32,34 @@ The project is structure in the following way:
 - Report 95% confidence intervals for the metrics using bootstrap resampling
 - Compare model performance against a DummyRegressor (mean prediction)
 
+### Modeling Approach
+
+The first step was to explore the dataset and find obvious issues like null values or ID mismatches. For rows with missing values, I chose to just drop them. The reason was that they made up less than 4% of the dataset, so I figured we weren't losing much representativity. That 4% included some rows that were completely empty, and others that were missing the target variable — which is way harder to deal with than a missing input feature.
+
+With the data "cleaned", I started inspecting how the target variable (Salary) was distributed. I found that it was skewed towards higher salaries, so I applied a log transform to reduce that skewness and get something closer to a normal distribution. I also plotted some numeric features (and education level) against salary to get a feel for how the data was behaving. As expected, higher values of age, education or experience were generally linked to higher salaries.
+
+The first model I went with was a basic linear regression. The motivation was that this kind of model is fast, easy to interpret, and works well as a baseline. As usual with linear models, categorical variables like "Education Level" and "Job Title" were one-hot encoded. To avoid high dimensionality, infrequent job titles were grouped under "Other". 
+
+Starting from version 1.3, the pipeline supports using either a Linear Regression or a Random Forest model.  
+The model can be selected using the `model_type` flag in the training and evaluation section of the notebook.
+
+For evaluation, I used MAE and RMSE on the real salary values (after reversing the log). I also added confidence intervals using bootstrap sampling to get a rough idea of how stable the model is. To put the model’s performance in context, I compared it against a DummyRegressor that just predicts the mean.
+
+The whole pipeline was designed to be modular and flexible, making it easy to plug in new features or swap out the model in future versions.
+
+
+
+
+
 _Aditional Features included post V1.0_
 
 - Save the model predictions in a SQL database.
 - Aditional graphs to visualize the relationship between used features and target variables.
+- Added random forest model. One can pick which one to use (For now it's only linear regression or random forest).
 
 
  _Future Improvements_
 
-- Add support for more sophisticated models (e.g., Random Forest)
 - Improve missing data handling instead of dropping rows (e.g., imputation based on correlated variables)
 
 
@@ -50,11 +69,22 @@ Clone this repository:
 
 
 git clone https://github.com/RomanPico/salary_prediction/.git
+
 cd salary-forecast
+
 python -m venv venv
+
 source venv/bin/activate  # On Windows: venv\Scripts\activate
+
 pip install -r requirements.txt
+
 jupyter notebook main.ipynb
+
+Once the notebook is open, scroll to the **Model Training & Evaluation** section and set the `model_type` variable to either:
+
+python
+model_type = "linear"         # for Linear Regression (default)
+model_type = "random_forest"  # for Random Forest
 
 
 ## CSV Format for Predictions
