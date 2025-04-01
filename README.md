@@ -27,7 +27,7 @@ The project is structure in the following way:
 - Load and clean the dataset using simple heuristics (drop rows with missing values)
 - Perform optional exploratory data analysis (EDA) including null inspection and variable distributions
 - Transform features: one-hot encoding for categorical variables and log-transform for the target (Salary)
-- Train a baseline predictive model using linear regression (Scikit-learn)
+- Train a baseline predictive model using linear regression (Scikit-learn). V1.3 incorporated Random Forest Model.
 - Evaluate the model using MAE and RMSE
 - Report 95% confidence intervals for the metrics using bootstrap resampling
 - Compare model performance against a DummyRegressor (mean prediction)
